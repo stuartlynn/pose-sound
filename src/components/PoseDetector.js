@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import * as posenet from '@tensorflow-models/posenet';
 import Webcam from 'react-webcam';
 import ReactAnimationFrame from 'react-animation-frame';
 import PoseViewer from './PoseViewer';
 
+const posenet = window.posenet
 class PoseDetector extends Component {
   static propTypes = {
     children: PropTypes.node,
@@ -181,7 +181,7 @@ class PoseDetector extends Component {
   }
 
   componentWillMount() {
-    posenet.load(0.75).then(net => {
+    posenet.load(1.01).then(net => {
       this.net = net;
       this.setState({poseStatus: 'loaded'});
     });
