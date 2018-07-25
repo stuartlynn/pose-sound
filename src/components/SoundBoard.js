@@ -28,11 +28,15 @@ class SoundBoard extends Component {
         .domain([s.fadeInStart, s.start, s.end, s.fadeOutEnd])
         .range([0, s.volume, s.volume, 0]);
 
-      const volume = s.on ?  ramp(position) : 0 ;
+      const volume = s.on ? ramp(position) : 0;
+      const base =
+        window.location.href.indexOf('github') > -1
+          ? '/pose-sound/sounds/'
+          : '/sounds/';
 
       return (
         <Sound
-          url={'sounds/' + s.url}
+          url={base + s.url}
           key={s.name}
           playStatus={
             this.props.playing ? Sound.status.PLAYING : Sound.status.PAUSED
