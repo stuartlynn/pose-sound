@@ -6,7 +6,7 @@ import Checkbox from 'rc-checkbox';
 import 'rc-slider/assets/index.css';
 
 const ControllsOuter = styled.div`
-  width : 300px;
+  width : 500px;
   heigth: 400px;
   background-color: white;
   position:absolute;
@@ -72,11 +72,13 @@ class Controlls extends Component {
                 min={0}
                 max={100}
                 step={1}
-                value={[s.start, s.end]}
+                pushable={true}
+                count={4}
+                value={[s.fadeInStart,s.start, s.end, s.fadeOutEnd]}
                 style={{flex: '90%'}}
                 onChange={r =>
                   this.props.onUpdateSound(
-                    {...s, start: r[0], end: r[1]},
+                    {...s, fadeInStart:r[0], start: r[1], end: r[2], fadeOutEnd: r[3]},
                     index,
                   )
                 }
@@ -92,7 +94,7 @@ class Controlls extends Component {
                   max={100}
                   step={1}
                   value={s.volume}
-                  style={{width: '90%'}}
+                  style={{width: '90%', marginRight:'20px'}}
                   onChange={v =>
                     this.props.onUpdateSound({...s, volume: v}, index)
                   }
