@@ -32,7 +32,7 @@ class SoundBoard extends Component {
 
       return (
         <Sound
-          url={'/sounds/' + s.url}
+          url={'sounds/' + s.url}
           key={s.name}
           playStatus={
             this.props.playing ? Sound.status.PLAYING : Sound.status.PAUSED
