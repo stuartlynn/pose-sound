@@ -19,6 +19,7 @@ class App extends Component {
     scaledCompression: 200,
     playing: false,
     trackPosition: false,
+    smoothing: 50,
   };
 
   handleKeyDown(event) {
@@ -36,6 +37,11 @@ class App extends Component {
         });
     }
   }
+
+  updateSmoothing(smoothing) {
+    this.setState({smoothing});
+  }
+
   loadSettings() {
     console.log('attempting to get sounds');
     if (localStorage.getItem('sounds')) {
@@ -66,17 +72,19 @@ class App extends Component {
   }
   compressionChanged(compression) {
     const range = this.state.range;
-    const scaledCompression = 100*(compression - range[0]) / (range[1] - range[0]);
-    const oldPosition = this.state.position
+    const scaledCompression =
+      (100 * (compression - range[0])) / (range[1] - range[0]);
+    const oldPosition = this.state.position;
 
-    const exponentalAvg = scaledCompression * 0.7 + (1-0.7)* oldPosition
+    const smoothing = this.state.smoothing/100.0
+    const exponentalAvg = scaledCompression * smoothing  + (1 - smoothing) * oldPosition;
 
-    const position = this.state.trackPosition ? exponentalAvg : oldPosition
+    const position = this.state.trackPosition ? exponentalAvg : oldPosition;
 
     this.setState({
       rawCompression: compression,
       scaledCompression: scaledCompression,
-      position : position
+      position: position,
     });
   }
   updateRange(range) {
@@ -111,6 +119,8 @@ class App extends Component {
             playing={this.state.playing}
             onSaveSettings={this.saveSettings.bind(this)}
             trackPosition={this.state.trackPosition}
+            smoothing={this.state.smoothing}
+            onSmoothingChange={this.updateSmoothing.bind(this)}
             onTrackPositionToggle={() =>
               this.setState({trackPosition: !this.state.trackPosition})
             }

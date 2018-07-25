@@ -59,6 +59,16 @@ class Controlls extends Component {
           onChange={this.props.onRangeChange}
           style={{width: '90%'}}
         />
+
+        <p>Smoothing</p>
+        <Slider
+          min={0}
+          max={100}
+          step={1}
+          value={this.props.smoothing}
+          onChange={this.props.onSmoothingChange}
+          style={{width: '90%'}}
+        />
         <p>{this.props.rawCompression}</p>
         <p>{this.props.scaledCompression}</p>
         <div style={{height:'600px', overflowY: 'scroll'}}>
