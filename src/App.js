@@ -73,7 +73,7 @@ class App extends Component {
   compressionChanged(compression) {
     const range = this.state.range;
     const scaledCompression =
-      (100 * (compression - range[0])) / (range[1] - range[0]);
+      100 - (100 * (compression - range[0])) / (range[1] - range[0]);
     const oldPosition = this.state.position;
 
     const smoothing = this.state.smoothing/100.0
