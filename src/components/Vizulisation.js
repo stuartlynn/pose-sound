@@ -40,7 +40,7 @@ class Vizulisation extends Component {
   render() {
     const color = d3.color(this.color_scale(this.props.position)).hex();
     return (
-      <svg viewBox="0 0 100 100" style={{width: '100%', height: '100%', position:'absolute', left:0, top:0, backgroundColor:'#01ff99'}}>
+      <svg viewBox="0 0 100 100" style={{width: '100%', height: '100%', position:'absolute', left:0, top:0, backgroundColor:'#7a0e26'}}>
         <circle cx={50} cy={50} r={this.size_scale(this.props.position)} fill={color} />
       </svg>
     );
