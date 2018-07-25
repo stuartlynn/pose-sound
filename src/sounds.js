@@ -51,7 +51,7 @@ export default [
   },
 
   {
-    url: 'MUSIC_POSE2',
+    url: 'MUSIC_POSE2.mp3',
     name: 'Music pose 2',
     fadeInStart: 40,
     start: 50,
@@ -81,7 +81,7 @@ export default [
 
 
   {
-    url: 'VOICES2m2s.mp3',
+    url: 'VOICES_2m2s.mp3',
     name: 'VOICES 1',
     fadeInStart: 0,
     start: 10,
@@ -93,7 +93,7 @@ export default [
 
 
   {
-    url: 'VOICES2m2s.mp3',
+    url: 'VOICES_2m2s.mp3',
     name: 'VOICES 2',
     fadeInStart: 30,
     start: 35,
@@ -104,7 +104,7 @@ export default [
 
 
   {
-    url: 'VOICES2m2s.mp3',
+    url: 'VOICES_2m2s.mp3',
     name: 'VOICES 3',
     fadeInStart: 30,
     start: 35,
