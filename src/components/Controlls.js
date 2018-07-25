@@ -16,6 +16,7 @@ const ControllsOuter = styled.div`
   padding:20px
   font-size:10px
 `;
+
 class Controlls extends Component {
   static propTypes = {
     children: PropTypes.node,
@@ -60,55 +61,57 @@ class Controlls extends Component {
         />
         <p>{this.props.rawCompression}</p>
         <p>{this.props.scaledCompression}</p>
-        {this.props.sounds.map((s, index) => {
-          const position = this.props.position;
-          const active = position < s.end && position > s.start;
-          const color = active ? 'red' : 'black';
-          return (
-            <div key={index}>
-              <p style={{color: color}}>{s.name}</p>
-              <Range
-                allowCross={false}
-                min={0}
-                max={100}
-                step={1}
-                pushable={true}
-                count={4}
-                value={[s.fadeInStart,s.start, s.end, s.fadeOutEnd]}
-                style={{flex: '90%'}}
-                onChange={r =>
-                  this.props.onUpdateSound(
-                    {...s, fadeInStart:r[0], start: r[1], end: r[2], fadeOutEnd: r[3]},
-                    index,
-                  )
-                }
-              />
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                }}>
-                <Slider
+        <div style={{height:'600px', overflowY: 'scroll'}}>
+          {this.props.sounds.map((s, index) => {
+            const position = this.props.position;
+            const active = position < s.end && position > s.start;
+            const color = active ? 'red' : 'black';
+            return (
+              <div key={index}  >
+                <p style={{color: color}}>{s.name}</p>
+                <Range
+                  allowCross={false}
                   min={0}
                   max={100}
                   step={1}
-                  value={s.volume}
-                  style={{width: '90%', marginRight:'20px'}}
-                  onChange={v =>
-                    this.props.onUpdateSound({...s, volume: v}, index)
+                  pushable={true}
+                  count={4}
+                  value={[s.fadeInStart,s.start, s.end, s.fadeOutEnd]}
+                  style={{flex: '90%'}}
+                  onChange={r =>
+                    this.props.onUpdateSound(
+                      {...s, fadeInStart:r[0], start: r[1], end: r[2], fadeOutEnd: r[3]},
+                      index,
+                    )
                   }
                 />
-                <Checkbox
-                  checked={s.on}
-                  onChange={() => {
-                    this.props.onUpdateSound({...s, on: !s.on}, index);
-                  }}
-                />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Slider
+                    min={0}
+                    max={100}
+                    step={1}
+                    value={s.volume}
+                    style={{width: '90%', marginRight:'20px'}}
+                    onChange={v =>
+                      this.props.onUpdateSound({...s, volume: v}, index)
+                    }
+                  />
+                  <Checkbox
+                    checked={s.on}
+                    onChange={() => {
+                      this.props.onUpdateSound({...s, on: !s.on}, index);
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </ControllsOuter>
     );
   }
